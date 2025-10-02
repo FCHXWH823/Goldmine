@@ -17,6 +17,17 @@ The static analysis module provides functionality to analyze Verilog code withou
 pip install networkx pyverilog pygraphviz numpy regex
 ```
 
+**Note:** `pyverilog` requires **Icarus Verilog** (`iverilog`) to be installed:
+
+- **Ubuntu/Debian**: `sudo apt-get install iverilog`
+- **macOS**: `brew install icarus-verilog`
+- **Windows**: Download from [Icarus Verilog website](http://bleyer.org/icarus/)
+
+For visualization, you also need **Graphviz**:
+
+- **Ubuntu/Debian**: `sudo apt-get install graphviz graphviz-dev`
+- **macOS**: `brew install graphviz`
+
 ## Core Components
 
 ### 1. `graph_builder.py`

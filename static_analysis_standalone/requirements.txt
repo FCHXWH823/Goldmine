@@ -1,0 +1,20 @@
+# Requirements for Static Analysis Standalone Module
+
+# Core dependencies
+networkx>=1.11
+pyverilog>=1.2.0
+
+# Note: pyverilog also requires Icarus Verilog (iverilog) to be installed
+# On Ubuntu/Debian: sudo apt-get install iverilog
+# On macOS: brew install icarus-verilog
+
+# Optional dependencies for visualization
+# Uncomment if you want to use graph visualization features
+# pygraphviz>=1.5
+# graphviz>=0.13
+
+# For code generation from AST
+# (included with pyverilog)
+
+# Useful for analysis
+numpy>=1.16.0

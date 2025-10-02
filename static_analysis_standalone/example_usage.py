@@ -9,6 +9,9 @@ to analyze a Verilog design.
 import sys
 import os
 
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 # Import Pyverilog for parsing
 try:
     from pyverilog.vparser.parser import parse
@@ -17,7 +20,14 @@ except ImportError:
     sys.exit(1)
 
 # Import static analysis functions
-from static_analysis_standalone import build_cdfg, analyze_dependencies, visualize_graph
+from static_analysis_standalone import build_cdfg, analyze_dependencies
+
+# Try to import visualize_graph (may not be available without pygraphviz)
+try:
+    from static_analysis_standalone import visualize_graph
+    VISUALIZATION_AVAILABLE = True
+except ImportError:
+    VISUALIZATION_AVAILABLE = False
 
 
 def analyze_verilog_file(verilog_file, output_dir='./static_analysis_output'):
@@ -83,14 +93,18 @@ def analyze_verilog_file(verilog_file, output_dir='./static_analysis_output'):
     
     # Step 4: Visualize graphs
     print("\n4. Generating visualizations...")
-    try:
-        visualize_graph(cdfg_info, output_dir)
-        print(f"   ✓ Visualizations saved to: {output_dir}")
-    except Exception as e:
-        print(f"   ✗ Error generating visualizations: {e}")
-        print(f"   Note: Visualization requires graphviz to be installed")
-        import traceback
-        traceback.print_exc()
+    if VISUALIZATION_AVAILABLE:
+        try:
+            visualize_graph(cdfg_info, output_dir)
+            print(f"   ✓ Visualizations saved to: {output_dir}")
+        except Exception as e:
+            print(f"   ✗ Error generating visualizations: {e}")
+            print(f"   Note: Visualization requires graphviz to be installed")
+            import traceback
+            traceback.print_exc()
+    else:
+        print("   ⚠ Visualization not available (pygraphviz not installed)")
+        print("   Note: Analysis results are still available in the cdfg_info object")
     
     # Step 5: Print summary
     print("\n" + "=" * 60)
