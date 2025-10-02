@@ -232,3 +232,35 @@ FAQs and tips
     4. We provide several formal verification IPs that can be used to formally verify the assertions. They are tuned for Cadence IFV. In case, you want to use a different formal verifier, please use those APIs and modify the internal functions to suit the format of the formal verifier used.
     5. Please go through the example directory to inspect different verilog codes and expected outputs for some sample designs.
     6. All GoldMine related papers are available at https://sites.google.com/view/goldmine-illinois/publications?authuser=0
+
+##############################################################################
+
+Static Analysis Standalone Module:
+
+    A standalone static analysis module has been created in the `static_analysis_standalone/` 
+    directory for users who only want to use the static analysis functionality of Goldmine
+    without the full tool chain.
+
+    Features:
+        - CDFG (Control/Data Flow Graph) construction
+        - Variable dependency analysis (def-use chains)
+        - Dependency graph construction
+        - Cone of influence computation
+        - Graph visualization (optional, requires pygraphviz)
+
+    Quick Start:
+        cd static_analysis_standalone
+        pip install -r requirements.txt
+        python demo.py
+
+    Documentation:
+        - README.md - Overview and API reference
+        - QUICKSTART.md - Quick start guide with examples
+        - demo.py - Demo with synthetic data (works without iverilog)
+        - example_usage.py - Example for real Verilog files (requires iverilog)
+        - examples/ - Sample Verilog files (counter.v, alu.v)
+
+    For more information, see static_analysis_standalone/README.md
+
+##############################################################################
+
